@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect, useRef } from "react";
 import { Input, Button, Tooltip, Modal, message } from "antd";
 import Phone from "../../assests/phone.gif";
 import Teams from "../../assests/teams.mp3";
-import * as classes from "./Options.module.css";
+import classes from "./Options.module.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import VideoContext from "../../context/VideoContext";
 import Hang from "../../assests/hang.svg";
