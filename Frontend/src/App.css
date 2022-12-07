@@ -10,7 +10,7 @@ header{
 }
 
 .page{
-  /* height: 100vh; */
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -25,4 +25,19 @@ header{
   /* margin: 5px; */
   /* border: 2px solid white; */
   /* padding: 20px; */
+}
+
+.mymodal{
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: white;
+  box-shadow: 2px 2px 7px 1px #00000048;
+  border-radius: 10px;
+  padding: 40px;
+  margin: 30px;
+}
+
+.close-btn{
+  /* posi */
 }

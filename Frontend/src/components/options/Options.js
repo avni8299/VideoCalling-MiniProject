@@ -59,22 +59,65 @@ const Options = () => {
 
   return (
     <div className="options-body p-4">
+      {call.isReceivingCall && !callAccepted && (
+        <>
+          <audio src={Teams} loop ref={Audio} />
+
+          <div
+            className="mymodal"
+            title="Incoming Call"
+            hidden={!isModalVisible}
+            onOk={() => showModal(false)}
+            onCancel={handleCancel}
+            footer={null}>
+            <div style={{ display: "flex", justifyContent: "space-around" }}>
+              <h1>
+                {call.name} is calling you: <img src={Phone} alt="phone ringing" style={{ display: "inline-block" }} />
+              </h1>
+            </div>
+            <div>
+              <div className="d-flex justify-content-evenly">
+                <button
+                className="btn btn-outline-success"
+                  onClick={() => {
+                    answerCall()
+                    Audio.current.pause()
+                  }}
+                  tabIndex="0">
+                  <i class="fas fa-phone"></i>&nbsp;
+                  Answer
+                </button>
+                <button
+                className="btn btn-outline-danger"
+                  onClick={() => {
+                    setIsModalVisible(false)
+                    Audio.current.pause()
+                  }}
+                  tabIndex="0">
+                    <i class="fas fa-phone-slash    "></i>&nbsp;
+                  Decline
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
       <div className="container">
-      <div className="row">
-        <div className="col-md-6">
-          <p className="text-white h5">Account Info</p>
-          <div className="option">
-            <div className="input-group">
-              <input
-                placeholder="Your name"
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value)
-                  localStorage.setItem("name", e.target.value)
-                }}
-                className="form-control"
-              />
-              <CopyToClipboard text={me}>
+        <div className="row">
+          <div className="col-md-6">
+            <p className="text-white h5">Account Info</p>
+            <div className="option">
+              <div className="input-group">
+                <input
+                  placeholder="Your name"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value)
+                    localStorage.setItem("name", e.target.value)
+                  }}
+                  className="form-control"
+                />
+                <CopyToClipboard text={me}>
                   <button
                     className="btn btn-primary"
                     tabIndex="0"
@@ -88,89 +131,48 @@ const Options = () => {
                   </button>
                 </CopyToClipboard>
 
-              <div>
-                
+                <div></div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <p className="text-white h5">Make a call</p>
+            <div className="option">
+              <div className="input-group">
+                <input
+                  placeholder="Enter code to call"
+                  className="form-control"
+                  value={idToCall}
+                  onChange={(e) => setIdToCall(e.target.value)}
+                />
 
-                
+                {callAccepted && !callEnded ? (
+                  <button onClick={leaveCall} className="btn btn-danger" tabIndex="0">
+                    <img src={Hang} alt="hang up" style={{ height: "15px" }} />
+                    &nbsp; Hang up
+                  </button>
+                ) : (
+                  <button
+                    type="primary"
+                    icon={<PhoneOutlined />}
+                    onClick={() => {
+                      if (name.length) callUser(idToCall)
+                      else
+                        Swal.fire({
+                          icon: "success",
+                          text: "Please enter your name to call!",
+                        })
+                    }}
+                    className="btn btn-success"
+                    tabIndex="0">
+                    <i class="fas fa-phone    "></i>
+                  </button>
+                )}
               </div>
             </div>
           </div>
         </div>
-        <div className="col-md-6">
-          <p className="text-white h5">Make a call</p>
-          <div className="option">
-            <div className="input-group">
-              <input
-                placeholder="Enter code to call"
-                className="form-control"
-                value={idToCall}
-                onChange={(e) => setIdToCall(e.target.value)}
-              />
-
-              {callAccepted && !callEnded ? (
-                <button onClick={leaveCall} className="btn btn-danger" tabIndex="0">
-                  <img src={Hang} alt="hang up" style={{ height: "15px" }} />
-                  &nbsp; Hang up
-                </button>
-              ) : (
-                <button
-                  type="primary"
-                  icon={<PhoneOutlined />}
-                  onClick={() => {
-                    if (name.length) callUser(idToCall)
-                    else
-                      Swal.fire({
-                        icon: "success",
-                        text: "Please enter your name to call!",
-                      })
-                  }}
-                  className="btn btn-success"
-                  tabIndex="0">
-                  <i class="fas fa-phone    "></i>
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
       </div>
-      {call.isReceivingCall && !callAccepted && (
-        <>
-          <audio src={Teams} loop ref={Audio} />
-          <Modal title="Incoming Call" visible={isModalVisible} onOk={() => showModal(false)} onCancel={handleCancel} footer={null}>
-            <div style={{ display: "flex", justifyContent: "space-around" }}>
-              <h1>
-                {call.name} is calling you: <img src={Phone} alt="phone ringing" style={{ display: "inline-block" }} />
-              </h1>
-            </div>
-            <div>
-              <Button
-                variant="contained"
-                color="#29bb89"
-                icon={<PhoneOutlined />}
-                onClick={() => {
-                  answerCall()
-                  Audio.current.pause()
-                }}
-                tabIndex="0">
-                Answer
-              </Button>
-              <Button
-                variant="contained"
-                icon={<PhoneOutlined />}
-                onClick={() => {
-                  setIsModalVisible(false)
-                  Audio.current.pause()
-                }}
-                tabIndex="0">
-                Decline
-              </Button>
-            </div>
-          </Modal>
-        </>
-      )}
-      </div>
-
-      
     </div>
   )
 }
