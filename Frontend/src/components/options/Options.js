@@ -133,8 +133,6 @@ const Options = () => {
           </div>
         </div>
       </div>
-      </div>
-
       {call.isReceivingCall && !callAccepted && (
         <>
           <audio src={Teams} loop ref={Audio} />
@@ -170,6 +168,9 @@ const Options = () => {
           </Modal>
         </>
       )}
+      </div>
+
+      
     </div>
   )
 }

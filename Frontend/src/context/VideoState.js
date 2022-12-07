@@ -4,8 +4,8 @@ import { io } from "socket.io-client";
 import Peer from "simple-peer";
 import { message } from "antd";
 
-// const URL = "https://fathomless-tundra-67025.herokuapp.com/";
-const URL = "http://localhost:5000/";
+const URL = "https://videocallapi.onrender.com/";
+// const URL = "http://localhost:5000/";
 
 export const socket = io(URL);
 

@@ -25,7 +25,7 @@ const Home = () => {
     <VideoState>
       <div className="page">
       <header>
-        <p className="page-title">Video Calling WebApp</p>
+        <p className="page-title m-2">Video Calling WebApp</p>
       </header>
       <Video />
       <Options />
