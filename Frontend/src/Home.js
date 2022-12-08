@@ -24,8 +24,11 @@ const Home = () => {
   return (
     <VideoState>
       <div className="page">
-      <header>
-        <p className="page-title m-2">Video Calling WebApp</p>
+      <header className="d-flex">
+        <a className="page-title m-2 mx-4" href="https://videocallfrontend.onrender.com">
+          <i class="fas fa-home"></i>
+        </a>
+        <p className="page-title m-2 w-100">Video Calling WebApp</p>
       </header>
       <Video />
       <Options />
