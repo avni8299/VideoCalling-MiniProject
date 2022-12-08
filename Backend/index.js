@@ -34,6 +34,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("msgUser", ({ name, to, msg, sender }) => {
+    console.log(msg);
     io.to(to).emit("msgRcv", { name, msg, sender });
   });
 

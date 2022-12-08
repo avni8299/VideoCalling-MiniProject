@@ -68,6 +68,7 @@ const Video = () => {
   };
 
   const onSearch = (value) => {
+    console.log(value);
     if (value && value.length) sendMsgFunc(value);
     setSendMsg("");
   };
@@ -146,13 +147,14 @@ const Video = () => {
                 <img src={Msg} alt="chat icon" />
               </div>
             )}
-            <Modal
+            <div
               title="Chat"
+              className="chat-area"
               footer={null}
-              visible={isModalVisible}
+              hidden={!isModalVisible}
               onOk={() => showModal(false)}
               onCancel={() => showModal(false)}
-              style={{ maxHeight: "100px" }}
+              // style={{ maxHeight: "100px" }}
             >
               {chat.length ? (
                 <div className="msg_flex">
@@ -180,7 +182,7 @@ const Video = () => {
                 size="large"
                 onSearch={onSearch}
               />
-            </Modal>
+            </div>
             {callAccepted && !callEnded && (
               <div
                 className="icons"
